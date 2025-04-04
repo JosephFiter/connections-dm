@@ -167,6 +167,7 @@ img, div, section, article, .friend-card, .friends-grid {
   .confirm-button {
     font-size: 14px;
     padding: 10px 20px;
+    margin-bottom: 20px;
   }
 
   .lives-display {
