@@ -127,3 +127,8 @@ html, body {
   background-size: cover;
   overflow-x: hidden;
 }
+
+
+* {
+  outline: 1px solid rgba(255, 0, 0, 0.2); /* para debuggear */
+}
