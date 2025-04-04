@@ -3,15 +3,17 @@ body {
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  width: 120vw;
   padding: 0;
 }
 
 .game-container {
+  position: relative;
   padding: 20px;
+  align-self:center ;
   text-align: center;
-  max-width: 100%;
-  margin: auto;
+  max-width: 40%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .champions-title {
@@ -55,6 +57,7 @@ body {
   gap: 15px;
   margin-top: 20px;
   justify-items: center;
+  max-width: 100%;
 }
 
 
@@ -120,4 +123,53 @@ body {
 img, div, section, article, .friend-card, .friends-grid {
   max-width: 100%;
   box-sizing: border-box;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .game-container {
+    max-width: 90%;
+    height: 100vh;
+    padding: 10px;
+  }
+
+  .champions-title {
+    font-size: 28px;
+  }
+
+  .friends-grid {
+    grid-template-columns: repeat(3, 1fr); /* En mobile, solo 2 columnas */
+    gap: 10px;
+  }
+
+  .friend-card {
+    padding: 10px;
+  }
+
+  .friend-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .group-members {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .game-message {
+    font-size: 18px;
+  }
+
+  .confirm-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .lives-display {
+    font-size: 16px;
+  }
 }

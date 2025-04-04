@@ -3,9 +3,9 @@ import Game from "./Game";
 
 const App: React.FC = () => {
   return (
-    <div>
+   
       <Game />
-    </div>
+   
   );
 };
 
