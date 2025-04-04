@@ -12,7 +12,7 @@ const Game: React.FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const [correctGroups, setCorrectGroups] = useState<Group[]>([]);
   const [message, setMessage] = useState<string>("");
-  const [lives, setLives] = useState<number>(4);
+  const [lives, setLives] = useState<number>(3);
   const [gameOver, setGameOver] = useState<boolean>(false);
 
   const handleSelect = (name: string) => {
@@ -36,7 +36,7 @@ const Game: React.FC = () => {
         const updatedGroups = [...correctGroups, newGroup];
         setCorrectGroups(updatedGroups);
         if (updatedGroups.length === 3) {
-          setMessage("🎉 ¡Ganaste! 🎉");
+          setMessage("🎉 ¡Ganaste la Champions League! 🎉");
         } else {
           setMessage("✅ ¡Grupo correcto!");
         }

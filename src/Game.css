@@ -83,6 +83,13 @@ body {
   text-shadow: 0 0 6px #00f0ff;
 }
 
+.lives-display {
+  font-size: 18px;
+  color: #ff9999;
+  margin-bottom: 10px;
+  text-shadow: 0 0 6px #ff4444;
+}
+
 .confirm-button {
   background: linear-gradient(90deg, #0033cc, #00f0ff);
   color: white;
