@@ -116,18 +116,6 @@ body {
 
 
 
-/* Fondo cubre todo */
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #1b1e3c, #0a0b20);
-  background-attachment: fixed; /* Fondo fijo mientras hacés scroll */
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow-x: hidden;
-}
-
 
 * {
   outline: 1px solid rgba(255, 0, 0, 0.2); /* para debuggear */
