@@ -1,12 +1,12 @@
 export const friends = [
-    { name: "Juan", category: "Grupo A", image: "juan.jpg" },
-    { name: "Pedro", category: "Grupo A", image: "pedro.jpg" },
-    { name: "María", category: "Grupo A", image: "maria.jpg" },
-    { name: "Lucía", category: "Grupo B", image: "lucia.jpg" },
-    { name: "Carlos", category: "Grupo B", image: "carlos.jpg" },
-    { name: "Sofía", category: "Grupo B", image: "sofia.jpg" },
-    { name: "Federico", category: "Grupo C", image: "federico.jpg" },
-    { name: "Ana", category: "Grupo C", image: "ana.jpg" },
-    { name: "Diego", category: "Grupo C", image: "diego.jpg" },
+    { name: "Juan", category: "Tecnologia Ditela", image: "juan.png" },
+    { name: "Fefo", category: "No esta en Dibuje", image: "fefo.png" },
+    { name: "Jumbo", category: "Ex-ort", image: "jumbo.png" },
+    { name: "Mauri", category: "No esta en Dibuje", image: "mauri.png" },
+    { name: "Oliber", category: "Tecnologia Ditela", image: "oliber.png" },
+    { name: "Panter", category: "Tecnologia Ditela", image: "panter.png" },
+    { name: "Pava", category: "No esta en Dibuje", image: "pava.png" },
+    { name: "Raizman", category: "Ex-ort", image: "raizman.png" },
+    { name: "Lucacho", category: "Ex-ort", image: "lucacho.png" },
 
   ];

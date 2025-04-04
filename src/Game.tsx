@@ -12,12 +12,11 @@ const Game: React.FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const [correctGroups, setCorrectGroups] = useState<Group[]>([]);
   const [message, setMessage] = useState<string>("");
-  const [won, setWon] = useState<boolean>(false);
+  const [lives, setLives] = useState<number>(4);
+  const [gameOver, setGameOver] = useState<boolean>(false);
 
-  let a=won;
-  let b=a;
-  a=b;
   const handleSelect = (name: string) => {
+    if (gameOver) return;
     setSelected((prev) => 
       prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]
     );
@@ -36,14 +35,20 @@ const Game: React.FC = () => {
         };
         const updatedGroups = [...correctGroups, newGroup];
         setCorrectGroups(updatedGroups);
-        setMessage("✅ ¡Grupo correcto!");
-
         if (updatedGroups.length === 3) {
-          setWon(true);
           setMessage("🎉 ¡Ganaste! 🎉");
+        } else {
+          setMessage("✅ ¡Grupo correcto!");
         }
       } else {
-        setMessage("❌ Grupo incorrecto");
+        const remainingLives = lives - 1;
+        setLives(remainingLives);
+        if (remainingLives <= 0) {
+          setMessage("💀 ¡Perdiste! Sin vidas restantes.");
+          setGameOver(true);
+        } else {
+          setMessage(`❌ Grupo incorrecto. Te quedan ${remainingLives} vidas.`);
+        }
       }
       setSelected([]);
     }
@@ -51,8 +56,9 @@ const Game: React.FC = () => {
 
   return (
     <div className="game-container">
-      <h1>Connections - Amigos</h1>
+      <h1 className="champions-title">Champions Connections</h1>
       {message && <h2 className="game-message">{message}</h2>}
+      {!gameOver && <h3 className="lives-display">Vidas restantes: {lives}</h3>}
       <div className="correct-groups">
         {correctGroups.map((group, index) => (
           <div key={index} className="group-container">
@@ -82,7 +88,7 @@ const Game: React.FC = () => {
           />
         ))}
       </div>
-      <button onClick={checkGroup} disabled={selected.length !== 3}>Confirmar Grupo</button>
+      <button onClick={checkGroup} disabled={selected.length !== 3 || gameOver} className="confirm-button">Confirmar Grupo</button>
     </div>
   );
 };
