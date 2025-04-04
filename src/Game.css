@@ -3,6 +3,7 @@ body {
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
+  width: 120vw;
   padding: 0;
 }
 
@@ -116,7 +117,7 @@ body {
 
 
 
-
-* {
-  outline: 1px solid rgba(255, 0, 0, 0.2); /* para debuggear */
+img, div, section, article, .friend-card, .friends-grid {
+  max-width: 100%;
+  box-sizing: border-box;
 }
