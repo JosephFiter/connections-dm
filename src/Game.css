@@ -133,7 +133,7 @@ img, div, section, article, .friend-card, .friends-grid {
 @media (max-width: 768px) {
   .game-container {
     max-width: 90%;
-    height: 100vh;
+    height: 100%;
     padding: 10px;
   }
 
