@@ -36,7 +36,7 @@ const Game: React.FC = () => {
         const updatedGroups = [...correctGroups, newGroup];
         setCorrectGroups(updatedGroups);
         if (updatedGroups.length === 3) {
-          setMessage("🎉 ¡Ganaste la Champions League! 🎉");
+          setMessage("🎉 ¡Ganaste! 🎉");
         } else {
           setMessage("✅ ¡Grupo correcto!");
         }
