@@ -14,6 +14,9 @@ const Game: React.FC = () => {
   const [message, setMessage] = useState<string>("");
   const [won, setWon] = useState<boolean>(false);
 
+  let a=won;
+  let b=a;
+  a=b;
   const handleSelect = (name: string) => {
     setSelected((prev) => 
       prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]
