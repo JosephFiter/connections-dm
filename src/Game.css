@@ -116,9 +116,14 @@ body {
 
 
 
+/* Fondo cubre todo */
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Evita scroll horizontal por si algo se pasa */
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #1b1e3c, #0a0b20);
+  background-attachment: fixed; /* Fondo fijo mientras hacés scroll */
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
 }
