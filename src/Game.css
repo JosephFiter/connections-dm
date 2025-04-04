@@ -50,10 +50,12 @@ body {
 
 .friends-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* Fuerza 3 columnas */
   gap: 15px;
   margin-top: 20px;
+  justify-items: center;
 }
+
 
 .correct-groups {
   margin-bottom: 20px;
@@ -110,3 +112,7 @@ body {
 .confirm-button:hover:not(:disabled) {
   background: linear-gradient(90deg, #002299, #00ccdd);
 }
+
+
+
+
