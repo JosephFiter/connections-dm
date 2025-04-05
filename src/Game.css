@@ -9,7 +9,7 @@ body {
 .game-container {
   position: relative;
   padding: 20px;
-  align-self:center ;
+  align-self: center;
   text-align: center;
   max-width: 40%;
   margin-left: auto;
@@ -53,14 +53,13 @@ body {
 
 .friends-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Fuerza 3 columnas */
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
   margin-top: 20px;
   justify-items: center;
   max-width: 100%;
   max-height: 100vh;
 }
-
 
 .correct-groups {
   margin-bottom: 20px;
@@ -74,9 +73,18 @@ body {
   box-shadow: 0 0 10px #00000077;
 }
 
-.group-members {
-  grid-template-columns: repeat(3, 1fr); /* Fuerza 3 columnas */
+.group-container.correct {
+  background-color: #1a3c1a; /* Verde oscuro */
+  border: 2px solid #00ff00; /* Borde verde brillante */
+}
 
+.group-container.incorrect {
+  background-color: #3c1a1a; /* Rojo oscuro */
+  border: 2px solid #ff0000; /* Borde rojo brillante */
+}
+
+.group-members {
+  grid-template-columns: repeat(3, 1fr);
   display: grid;
   justify-content: center;
   gap: 10px;
@@ -120,24 +128,15 @@ body {
   background: linear-gradient(90deg, #002299, #00ccdd);
 }
 
-
-
-
 img, div, section, article, .friend-card, .friends-grid {
   max-width: 100%;
   box-sizing: border-box;
 }
 
-
-
-
-
-
 @media (max-width: 768px) {
   .game-container {
     max-width: 90%;
     min-height: 100vh;
-
     height: 100%;
     padding: 10px;
   }
@@ -147,7 +146,7 @@ img, div, section, article, .friend-card, .friends-grid {
   }
 
   .friends-grid {
-    grid-template-columns: repeat(3, 1fr); /* En mobile, solo 2 columnas */
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 

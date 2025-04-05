@@ -6,6 +6,7 @@ import './Game.css';
 interface Group {
   category: string;
   members: { name: string; image: string }[];
+  isPlayerCorrect?: boolean; // Nueva propiedad para distinguir grupos del jugador
 }
 
 const Game: React.FC = () => {
@@ -22,6 +23,20 @@ const Game: React.FC = () => {
     );
   };
 
+  const getAllCorrectGroups = () => {
+    const categories = [...new Set(friends.map(f => f.category))];
+    return categories.map(category => {
+      const isPlayerCorrect = correctGroups.some(g => g.category === category);
+      return {
+        category,
+        members: friends
+          .filter(f => f.category === category)
+          .map(f => ({ name: f.name, image: f.image })),
+        isPlayerCorrect: isPlayerCorrect // Marcamos si el jugador lo acertó
+      };
+    });
+  };
+
   const checkGroup = () => {
     if (selected.length === 3) {
       const category = friends.find(f => f.name === selected[0])?.category;
@@ -31,7 +46,8 @@ const Game: React.FC = () => {
           members: selected.map(name => ({
             name,
             image: friends.find(f => f.name === name)?.image || ""
-          }))
+          })),
+          isPlayerCorrect: true // Marcamos como correcto del jugador
         };
         const updatedGroups = [...correctGroups, newGroup];
         setCorrectGroups(updatedGroups);
@@ -54,14 +70,19 @@ const Game: React.FC = () => {
     }
   };
 
+  const allGroups = gameOver ? getAllCorrectGroups() : correctGroups;
+
   return (
     <div className="game-container">
       <h1 className="champions-title">Champions Connections</h1>
       {message && <h2 className="game-message">{message}</h2>}
       {!gameOver && <h3 className="lives-display">Vidas restantes: {lives}</h3>}
       <div className="correct-groups">
-        {correctGroups.map((group, index) => (
-          <div key={index} className="group-container">
+        {allGroups.map((group, index) => (
+          <div 
+            key={index} 
+            className={`group-container ${group.isPlayerCorrect ? 'correct' : 'incorrect'}`}
+          >
             <h3>{group.category}</h3>
             <div className="group-members">
               {group.members.map((member) => (
@@ -77,18 +98,28 @@ const Game: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="friends-grid">
-        {friends.filter(f => !correctGroups.some(g => g.members.some(m => m.name === f.name))).map((friend) => (
-          <FriendCard 
-            key={friend.name} 
-            name={friend.name} 
-            image={friend.image}
-            selected={selected.includes(friend.name)}
-            onSelect={() => handleSelect(friend.name)}
-          />
-        ))}
-      </div>
-      <button onClick={checkGroup} disabled={selected.length !== 3 || gameOver} className="confirm-button">Confirmar Grupo</button>
+      {!gameOver && (
+        <div className="friends-grid">
+          {friends.filter(f => !correctGroups.some(g => g.members.some(m => m.name === f.name))).map((friend) => (
+            <FriendCard 
+              key={friend.name} 
+              name={friend.name} 
+              image={friend.image}
+              selected={selected.includes(friend.name)}
+              onSelect={() => handleSelect(friend.name)}
+            />
+          ))}
+        </div>
+      )}
+      {!gameOver && (
+        <button 
+          onClick={checkGroup} 
+          disabled={selected.length !== 3} 
+          className="confirm-button"
+        >
+          Confirmar Grupo
+        </button>
+      )}
     </div>
   );
 };

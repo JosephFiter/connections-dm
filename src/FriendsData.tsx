@@ -12,18 +12,4 @@ export const friends = [
   ...friend,
   image: `${friend.name.toLowerCase()}.png`
 }));
-  /*
-
-
-    { name: "Juan", category: "Tecnologia Ditela" },
-  { name: "Fefo", category: "No esta en Dibuje" },
-  { name: "Jumbo", category: "Ex-ort" },
-  { name: "Mauri", category: "No esta en Dibuje" },
-  { name: "Oliber", category: "Tecnologia Ditela" },
-  { name: "Panter", category: "Tecnologia Ditela" },
-  { name: "Pava", category: "No esta en Dibuje" },
-  { name: "Raizman", category: "Ex-ort" },
-  { name: "Lucacho", category: "Ex-ort" },
-
-
-  */
+  
