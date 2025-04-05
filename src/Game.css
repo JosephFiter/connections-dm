@@ -75,7 +75,9 @@ body {
 }
 
 .group-members {
-  display: flex;
+  grid-template-columns: repeat(3, 1fr); /* Fuerza 3 columnas */
+
+  display: grid;
   justify-content: center;
   gap: 10px;
   margin-top: 10px;
