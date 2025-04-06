@@ -6,7 +6,7 @@ export const friends = [
   { name: "Fefo", category: "Golf" },
   { name: "Suaya", category: "Futbol Hacoaj" },
   { name: "Chapu", category: "Celular android" },
-  { name: "Jumbo", category: "Celular android " },
+  { name: "Jumbo", category: "Celular android" },
   { name: "Juan", category: "Futbol Hacoaj" },
 ].map(friend => ({
   ...friend,
