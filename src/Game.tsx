@@ -2,25 +2,43 @@ import React, { useState } from 'react';
 import { friends } from './FriendsData';
 import FriendCard from './FriendCard';
 import './Game.css';
-
-interface Group {
-  category: string;
-  members: { name: string; image: string }[];
-  isPlayerCorrect?: boolean;
-}
+// Si tienes una imagen local, descomenta y ajusta la ruta:
+// import logo from './path/to/your/logo.png'; // Ajusta la ruta según tu estructura
 
 const Game: React.FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const [correctGroups, setCorrectGroups] = useState<Group[]>([]);
   const [message, setMessage] = useState<string>("");
-  const [lives, setLives] = useState<number>(3);
+  const [lives, setLives] = useState<number | null>(null);
   const [gameOver, setGameOver] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(true);
+
+  interface Group {
+    category: string;
+    members: { name: string; image: string }[];
+    isPlayerCorrect?: boolean;
+  }
 
   const handleSelect = (name: string) => {
-    if (gameOver) return;
+    if (gameOver || lives === null) return;
     setSelected((prev) =>
       prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]
     );
+  };
+
+  const startGame = (mode: 'easy' | 'normal' | 'hard') => {
+    switch (mode) {
+      case 'easy':
+        setLives(Infinity);
+        break;
+      case 'normal':
+        setLives(5);
+        break;
+      case 'hard':
+        setLives(3);
+        break;
+    }
+    setShowModal(false);
   };
 
   const getAllCorrectGroups = () => {
@@ -38,11 +56,8 @@ const Game: React.FC = () => {
   };
 
   const checkGroup = () => {
-    if (selected.length === 3) {
-      // Obtener las categorías de los elementos seleccionados
+    if (selected.length === 3 && lives !== null) {
       const categories = selected.map((name) => friends.find((f) => f.name === name)?.category);
-
-      // Contar cuántos elementos pertenecen a la categoría más común
       const categoryCounts: { [key: string]: number } = {};
       categories.forEach((cat) => {
         if (cat) categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
@@ -54,7 +69,6 @@ const Game: React.FC = () => {
       );
 
       if (maxMatches === 3) {
-        // Grupo completamente correcto
         const newGroup = {
           category: dominantCategory || "Desconocido",
           members: selected.map((name) => ({
@@ -71,16 +85,23 @@ const Game: React.FC = () => {
           setMessage("✅ ¡Grupo correcto!");
         }
       } else {
-        // Grupo parcial o incorrecto
-        const remainingLives = lives - 1;
-        setLives(remainingLives);
-        if (remainingLives <= 0) {
-          setMessage("💀 ¡Perdiste! Sin vidas restantes.");
-          setGameOver(true);
-        } else if (maxMatches === 2) {
-          setMessage(`⚠️ Tienes 2 bien. Te quedan ${remainingLives} vidas.`);
+        if (lives === Infinity) {
+          if (maxMatches === 2) {
+            setMessage("⚠️ Tienes 2 bien. ¡Sigue intentando!");
+          } else {
+            setMessage("❌ Grupo incorrecto. ¡Sigue intentando!");
+          }
         } else {
-          setMessage(`❌ Grupo incorrecto. Te quedan ${remainingLives} vidas.`);
+          const remainingLives = lives - 1;
+          setLives(remainingLives);
+          if (remainingLives <= 0) {
+            setMessage("💀 ¡Perdiste! Sin vidas restantes.");
+            setGameOver(true);
+          } else if (maxMatches === 2) {
+            setMessage(`⚠️ Tienes 2 bien. Te quedan ${remainingLives} vidas.`);
+          } else {
+            setMessage(`❌ Grupo incorrecto. Te quedan ${remainingLives} vidas.`);
+          }
         }
       }
       setSelected([]);
@@ -91,53 +112,85 @@ const Game: React.FC = () => {
 
   return (
     <div className="game-container">
-      <h1 className="champions-title">Champions Connections</h1>
-      {message && <h2 className="game-message">{message}</h2>}
-      {!gameOver && <h3 className="lives-display">Vidas restantes: {lives}</h3>}
-      <div className="correct-groups">
-        {allGroups.map((group, index) => (
-          <div
-            key={index}
-            className={`group-container ${group.isPlayerCorrect ? 'correct' : 'incorrect'}`}
-          >
-            <h3>{group.category}</h3>
-            <div className="group-members">
-              {group.members.map((member) => (
-                <FriendCard
-                  key={member.name}
-                  name={member.name}
-                  image={member.image}
-                  selected={false}
-                  onSelect={() => {}}
-                />
-              ))}
-            </div>
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            {/* Logo arriba del modal */}
+            <img
+              src="logo2.png" // URL de ejemplo, reemplaza con tu logo
+              // Si usas una imagen local: src={logo}
+              alt="Game Logo"
+              className="modal-logo"
+            />
+            <h2>Elige el modo de juego</h2>
+            <button onClick={() => startGame('easy')} className="mode-button">
+              Fácil (Vidas ilimitadas)
+            </button>
+            <button onClick={() => startGame('normal')} className="mode-button">
+              Normal (5 vidas)
+            </button>
+            <button onClick={() => startGame('hard')} className="mode-button">
+              Difícil (3 vidas)
+            </button>
           </div>
-        ))}
-      </div>
-      {!gameOver && (
-        <div className="friends-grid">
-          {friends
-            .filter((f) => !correctGroups.some((g) => g.members.some((m) => m.name === f.name)))
-            .map((friend) => (
-              <FriendCard
-                key={friend.name}
-                name={friend.name}
-                image={friend.image}
-                selected={selected.includes(friend.name)}
-                onSelect={() => handleSelect(friend.name)}
-              />
-            ))}
         </div>
       )}
-      {!gameOver && (
-        <button
-          onClick={checkGroup}
-          disabled={selected.length !== 3}
-          className="confirm-button"
-        >
-          Confirmar Grupo
-        </button>
+      {!showModal && (
+        <>
+          <h1 className="champions-title">Champions Connections</h1>
+          {message && <h2 className="game-message">{message}</h2>}
+          {lives !== Infinity && !gameOver && (
+            <h3 className="lives-display">Vidas restantes: {lives}</h3>
+          )}
+          {lives === Infinity && !gameOver && (
+            <h3 className="lives-display">Modo Fácil: Vidas ilimitadas</h3>
+          )}
+          <div className="correct-groups">
+            {allGroups.map((group, index) => (
+              <div
+                key={index}
+                className={`group-container ${group.isPlayerCorrect ? 'correct' : 'incorrect'}`}
+              >
+                <h3>{group.category}</h3>
+                <div className="group-members">
+                  {group.members.map((member) => (
+                    <FriendCard
+                      key={member.name}
+                      name={member.name}
+                      image={member.image}
+                      selected={false}
+                      onSelect={() => {}}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          {!gameOver && (
+            <div className="friends-grid">
+              {friends
+                .filter((f) => !correctGroups.some((g) => g.members.some((m) => m.name === f.name)))
+                .map((friend) => (
+                  <FriendCard
+                    key={friend.name}
+                    name={friend.name}
+                    image={friend.image}
+                    selected={selected.includes(friend.name)}
+                    onSelect={() => handleSelect(friend.name)}
+                  />
+                ))}
+            </div>
+          )}
+          {!gameOver && (
+            <button
+              onClick={checkGroup}
+              disabled={selected.length !== 3}
+              className="confirm-button"
+            >
+              Confirmar Grupo
+            </button>
+          )}
+        </>
       )}
     </div>
   );

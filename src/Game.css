@@ -133,6 +133,66 @@ img, div, section, article, .friend-card, .friends-grid {
   box-sizing: border-box;
 }
 
+
+
+
+
+
+
+
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #1b1e3c, #0a0b20);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-logo {
+  display: block;
+  margin: 0 auto 20px auto; /* Centrado con margen inferior */
+  width: 150px; /* Ajusta el tamaño según necesites */
+  height: auto;
+}
+.modal {
+  background: rgb(0, 75, 128);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  color: #dfdfdf;
+}
+
+.mode-button {
+  display: block;
+  width: 200px;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.mode-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
 @media (max-width: 768px) {
   .game-container {
     max-width: 90%;
