@@ -1,13 +1,13 @@
 export const friends = [
-  { name: "Pava", category: "Hinchas de river" },
-  { name: "Vito", category: "No vienen a las juntadas" },
-  { name: "Raizman", category: "Hinchas de river" },
-  { name: "Castre", category: "No vienen a las juntadas" },
-  { name: "Fefo", category: "Hinchas de river" },
-  { name: "Naguito", category: "Baja estatura" },
-  { name: "Suaya", category: "Baja estatura" },
-  { name: "Chapu", category: "No vienen a las juntadas" },
-  { name: "Burstein", category: "Baja estatura" },
+  { name: "Fiter", category: "Fueron al casino en pinamar" },
+  { name: "Vito", category: "Pelo caracteristico" },
+  { name: "Raizman", category: "Fueron al casino en pinamar" },
+  { name: "Setton", category: "Universidad en usa" },
+  { name: "Uri", category: "Fueron al casino en pinamar" },
+  { name: "Naguito", category: "Pelo caracteristico" },
+  { name: "Suaya", category: "Universidad en usa" },
+  { name: "Chapu", category: "Pelo caracteristico" },
+  { name: "Felix", category: "Universidad en usa" },
 ].map(friend => ({
   ...friend,
   image: `${friend.name.toLowerCase()}.png`
