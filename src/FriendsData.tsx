@@ -1,5 +1,5 @@
 export const friends = [
-  { name: "Fiter", category: "Fueron al casino en pinamar" },
+  { name: "Jumbo", category: "Fueron al casino en pinamar" },
   { name: "Vito", category: "Pelo caracteristico" },
   { name: "Raizman", category: "Fueron al casino en pinamar" },
   { name: "Setton", category: "Universidad en usa" },
@@ -12,4 +12,3 @@ export const friends = [
   ...friend,
   image: `${friend.name.toLowerCase()}.png`
 }));
-  
